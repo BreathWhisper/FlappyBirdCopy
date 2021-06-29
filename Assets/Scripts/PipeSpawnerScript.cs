@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class PipeSpawnerScript : MonoBehaviour
 {
-    public GameObject pipes;
+    [SerializeField] private int poolCount = 4;
+    [SerializeField] private bool autoExpand = true;
+    [SerializeField] private PipeScript pipePrefab;
+    //public GameObject pipes;
+
+    private PoolMono<PipeScript> pool;
     void Start()
     {
-        StartCoroutine("PipeSpawner");
+        this.pool = new PoolMono<PipeScript>(this.pipePrefab, this.poolCount, this.transform)
+        {
+            autoExpand = this.autoExpand
+        };
+        StartCoroutine("PipeSpawnerCrt");
     }
 
     /*private void OnDisable()
@@ -19,16 +28,23 @@ public class PipeSpawnerScript : MonoBehaviour
 
     }
 
-    IEnumerator PipeSpawner()
+    IEnumerator PipeSpawnerCrt()
     {
         while (true)
         {
             yield return new WaitForSecondsRealtime(2);
-            float rand = Random.Range(-4f, 4);
 
-            GameObject pipe = Instantiate(pipes, new Vector2(5, rand), Quaternion.identity);
-            Destroy(pipe, 8);
-
+            PipeSpawn();
         }
+    }
+
+    private void PipeSpawn()
+    {
+        float rand = Random.Range(-4f, 4);
+
+        var pipe = this.pool.GetFreeElement();
+        pipe.transform.position = new Vector2(5, rand);
+        //GameObject pipe = Instantiate(pipes, new Vector2(5, rand), Quaternion.identity);
+        //Destroy(pipe, 8);
     }
 }
