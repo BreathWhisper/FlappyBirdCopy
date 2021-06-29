@@ -14,6 +14,7 @@ public class BirdScript : MonoBehaviour
     {
         birdRigidBody2D =  GetComponent<Rigidbody2D>();
         Time.timeScale = 1;
+        
     }
 
     void Update()
@@ -22,11 +23,16 @@ public class BirdScript : MonoBehaviour
         {
             BirdJump();
         }
+        float rotation = birdRigidBody2D.velocity.y * 0.2f;
+        if (transform.rotation.z > 0.4f && rotation > 0) rotation = 0;
+        else if (transform.rotation.z < -0.4f && rotation < 0) rotation = 0;
+        transform.Rotate(0, 0, rotation, Space.Self);
     }
 
     private void BirdJump()
     {
         birdRigidBody2D.velocity = Vector2.up * jumpForce;
+        birdRigidBody2D.rotation = 30f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
