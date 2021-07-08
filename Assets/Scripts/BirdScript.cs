@@ -6,6 +6,7 @@ public class BirdScript : MonoBehaviour
 {
     private Rigidbody2D birdRigidBody2D;
     [SerializeField] private float jumpForce = 8;
+    private float maxRotationAngle = 0.4f;
 
     public GameObject restartButton;
     public GameObject pipeSpawner;
@@ -23,21 +24,20 @@ public class BirdScript : MonoBehaviour
         {
             BirdJump();
         }
-        float rotation = birdRigidBody2D.velocity.y * 0.2f;
-        if (transform.rotation.z > 0.4f && rotation > 0) rotation = 0;
-        else if (transform.rotation.z < -0.4f && rotation < 0) rotation = 0;
-        transform.Rotate(0, 0, rotation, Space.Self);
+        float rotationForce = birdRigidBody2D.velocity.y * 0.4f;
+        if (transform.rotation.z > maxRotationAngle && rotationForce > 0) rotationForce = 0;
+        else if (transform.rotation.z < -maxRotationAngle && rotationForce < 0) rotationForce = 0;
+        transform.Rotate(0, 0, rotationForce, Space.Self);
     }
 
     private void BirdJump()
     {
         birdRigidBody2D.velocity = Vector2.up * jumpForce;
-        birdRigidBody2D.rotation = 30f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Enemy")
+        if (collision.collider.CompareTag("Enemy"))
         {
             Destroy(gameObject);
             Time.timeScale = 0;

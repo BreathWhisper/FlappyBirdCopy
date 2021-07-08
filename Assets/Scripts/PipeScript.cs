@@ -24,7 +24,7 @@ public class PipeScript : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         transform.Translate(Vector2.left * pipeSpeed * Time.deltaTime);
     }

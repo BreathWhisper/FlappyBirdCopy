@@ -907,7 +907,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a89fa2366d2054aa280c79086e2197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pipes: {fileID: 6507464689323701467, guid: 0a88221f667a315498cd0b2c588b7aa5, type: 3}
+  poolCount: 4
+  autoExpand: 1
+  pipePrefab: {fileID: 6507464689323701466, guid: 0a88221f667a315498cd0b2c588b7aa5, type: 3}
 --- !u!4 &1702425182
 Transform:
   m_ObjectHideFlags: 0

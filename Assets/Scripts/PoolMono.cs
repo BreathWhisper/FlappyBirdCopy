@@ -7,14 +7,14 @@ public class PoolMono<T> where T : MonoBehaviour
 {
     public T prefab { get; }
     public bool autoExpand { get; set; }
-    public Transform container { get; }
+    public Transform setSpawnContainer { get; }
 
     private List<T> pool;
 
     public PoolMono(T prefab, int count)
     {
         this.prefab = prefab;
-        this.container = null;
+        this.setSpawnContainer = null;
 
         this.CreatePool(count);
     }
@@ -22,7 +22,7 @@ public class PoolMono<T> where T : MonoBehaviour
     public PoolMono(T prefab, int count, Transform container)
     {
         this.prefab = prefab;
-        this.container = container;
+        this.setSpawnContainer = container;
 
         this.CreatePool(count);
     }
@@ -40,7 +40,7 @@ public class PoolMono<T> where T : MonoBehaviour
 
     private T CreateObject(bool isActiveByDefault = false)
     {
-        var createdObject = Object.Instantiate(this.prefab, this.container);
+        var createdObject = Object.Instantiate(this.prefab, this.setSpawnContainer);
         createdObject.gameObject.SetActive(isActiveByDefault);
         this.pool.Add(createdObject);
         return createdObject;

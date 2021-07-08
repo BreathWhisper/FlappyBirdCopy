@@ -8,15 +8,9 @@ public class ScoreScript : MonoBehaviour
     private int score;
     public Text scoreText;
 
-    void Start()
+    private void Start()
     {
         score =  0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        scoreText.text = score.ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,6 +18,7 @@ public class ScoreScript : MonoBehaviour
         if (collision.tag == "Score")
         {
             score++;
+            scoreText.text = score.ToString();
         }
     }
 }

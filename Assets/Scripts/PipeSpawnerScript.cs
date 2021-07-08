@@ -9,8 +9,10 @@ public class PipeSpawnerScript : MonoBehaviour
     [SerializeField] private PipeScript pipePrefab;
     //public GameObject pipes;
 
+    private float maxYSpawn = 4f, minYSpawn = -4f;
+
     private PoolMono<PipeScript> pool;
-    void Start()
+    private void Start()
     {
         this.pool = new PoolMono<PipeScript>(this.pipePrefab, this.poolCount, this.transform)
         {
@@ -23,10 +25,6 @@ public class PipeSpawnerScript : MonoBehaviour
     {
         StopCoroutine("PipeSpawner");
     }*/
-    void Update()
-    {
-
-    }
 
     IEnumerator PipeSpawnerCrt()
     {
@@ -40,11 +38,11 @@ public class PipeSpawnerScript : MonoBehaviour
 
     private void PipeSpawn()
     {
-        float rand = Random.Range(-4f, 4);
+        float randYSpawnPosition = Random.Range(minYSpawn, maxYSpawn);
 
         var pipe = this.pool.GetFreeElement();
-        pipe.transform.position = new Vector2(5, rand);
-        //GameObject pipe = Instantiate(pipes, new Vector2(5, rand), Quaternion.identity);
+        pipe.transform.position = new Vector2(5, randYSpawnPosition);
+        //GameObject pipe = Instantiate(pipes, new Vector2(5, randYSpawnPosition), Quaternion.identity);
         //Destroy(pipe, 8);
     }
 }
