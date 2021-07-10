@@ -86,4 +86,45 @@ public class PoolMono<T> where T : MonoBehaviour
         }
         return t;
     }
+
+    public bool HasActiveElement(out T element)
+    {
+        foreach (var mono in pool)
+        {
+            if (mono.gameObject.activeInHierarchy)
+            {
+                element = mono;
+                mono.gameObject.SetActive(false);
+                return true;
+            }
+        }
+
+        element = null;
+        return false;
+    }
+
+    public T GetActiveElement()
+    {
+        if (this.HasActiveElement(out var element))
+        {
+            return element;
+        }
+
+        if (this.autoExpand)
+        {
+            return this.CreateObject(true);
+        }
+
+        throw new System.Exception($"there is no active elements in pool of type {typeof(T)}");
+    }
+
+    public List<T> GetAllActiveElement()
+    {
+        List<T> t = new List<T>();
+        while (this.HasActiveElement(out var element))
+        {
+            t.Add(element);
+        }
+        return t;
+    }
 }

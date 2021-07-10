@@ -7,7 +7,6 @@ public class PipeSpawnerScript : MonoBehaviour
     [SerializeField] private int poolCount = 4;
     [SerializeField] private bool autoExpand = true;
     [SerializeField] private PipeScript pipePrefab;
-    //public GameObject pipes;
 
     private float maxYSpawn = 4f, minYSpawn = -4f;
 
@@ -18,13 +17,12 @@ public class PipeSpawnerScript : MonoBehaviour
         {
             autoExpand = this.autoExpand
         };
-        StartCoroutine("PipeSpawnerCrt");
     }
 
-    /*private void OnDisable()
+    private void OnEnable()
     {
-        StopCoroutine("PipeSpawner");
-    }*/
+        StartCoroutine(nameof(PipeSpawnerCrt));
+    }
 
     IEnumerator PipeSpawnerCrt()
     {
@@ -42,7 +40,5 @@ public class PipeSpawnerScript : MonoBehaviour
 
         var pipe = this.pool.GetFreeElement();
         pipe.transform.position = new Vector2(5, randYSpawnPosition);
-        //GameObject pipe = Instantiate(pipes, new Vector2(5, randYSpawnPosition), Quaternion.identity);
-        //Destroy(pipe, 8);
     }
 }

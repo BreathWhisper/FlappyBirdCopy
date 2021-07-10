@@ -9,7 +9,12 @@ public class PipeScript : MonoBehaviour
 
     private void OnEnable()
     {
-        this.StartCoroutine("LifeRoutine");
+        this.StartCoroutine(nameof(LifeRoutine));
+    }
+
+    private void OnDisable()
+    {
+        this.Deactivate();
     }
 
     private IEnumerator LifeRoutine()
@@ -19,7 +24,7 @@ public class PipeScript : MonoBehaviour
         this.Deactivate();
     }
 
-    private void Deactivate()
+    public void Deactivate()
     {
         this.gameObject.SetActive(false);
     }

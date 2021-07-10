@@ -740,7 +740,6 @@ GameObject:
   - component: {fileID: 1658150751}
   - component: {fileID: 1658150750}
   - component: {fileID: 1658150749}
-  - component: {fileID: 1658150754}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Untagged
@@ -763,6 +762,7 @@ MonoBehaviour:
   jumpForce: 6
   restartButton: {fileID: 850049877}
   pipeSpawner: {fileID: 1702425180}
+  scoreText: {fileID: 1603694326}
 --- !u!50 &1658150750
 Rigidbody2D:
   serializedVersion: 4
@@ -865,19 +865,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1658150754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658150748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd54f34dd6ebd3d45a5c2155c3a75971, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 1603694326}
 --- !u!1 &1702425180
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f03be3628f77047bbc238561878443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bird: {fileID: 1658150748}
+  pipeSpawner: {fileID: 1702425180}
 --- !u!4 &1823107520
 Transform:
   m_ObjectHideFlags: 0
